@@ -70,4 +70,189 @@
                         <input type="text" id="in_categorie_fornitori" placeholder="Es. Subfornitore, Esterno...">
                         <button class="btn btn-add" onclick="saveItem('categorie_fornitori')">+</button>
                     </div>
-                    <ul id="list_categorie_fornitori" class
+                    <ul id="list_categorie_fornitori" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">💼 Elenco Agenti / Venditori</div>
+                    <div class="input-group">
+                        <input type="text" id="in_agenti_commercio" placeholder="Nome Agente...">
+                        <button class="btn btn-add" onclick="saveItem('agenti_commercio')">+</button>
+                    </div>
+                    <ul id="list_agenti_commercio" class="item-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-vendite" class="tab-content">
+            <div class="config-grid">
+                <div class="config-box">
+                    <div class="box-title">📊 Aliquote IVA</div>
+                    <div class="input-group">
+                        <input type="text" id="in_aliquote_iva" placeholder="Es. 22%, 10%, Esente...">
+                        <button class="btn btn-add" onclick="saveItem('aliquote_iva')">+</button>
+                    </div>
+                    <ul id="list_aliquote_iva" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">💳 Condizioni di Pagamento</div>
+                    <div class="input-group">
+                        <input type="text" id="in_condizioni_pagamento" placeholder="Es. R.D. 30 gg, Contanti...">
+                        <button class="btn btn-add" onclick="saveItem('condizioni_pagamento')">+</button>
+                    </div>
+                    <ul id="list_condizioni_pagamento" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">📝 Causali di Vendita / Fatturazione</div>
+                    <div class="input-group">
+                        <input type="text" id="in_causali_vendita" placeholder="Es. Vendita, Conto Visione...">
+                        <button class="btn btn-add" onclick="saveItem('causali_vendita')">+</button>
+                    </div>
+                    <ul id="list_causali_vendita" class="item-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-magazzino" class="tab-content">
+            <div class="config-grid">
+                <div class="config-box">
+                    <div class="box-title">📏 Unità di Misura</div>
+                    <div class="input-group">
+                        <input type="text" id="in_unita_misura" placeholder="Es. Kg, Pz, Metri, Litri...">
+                        <button class="btn btn-add" onclick="saveItem('unita_misura')">+</button>
+                    </div>
+                    <ul id="list_unita_misura" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">🏪 Elenco Depositi / Località</div>
+                    <div class="input-group">
+                        <input type="text" id="in_depositi_magazzino" placeholder="Es. Magazzino Centrale, Negozio...">
+                        <button class="btn btn-add" onclick="saveItem('depositi_magazzino')">+</button>
+                    </div>
+                    <ul id="list_depositi_magazzino" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">🔄 Causali Movimento Magazzino</div>
+                    <div class="input-group">
+                        <input type="text" id="in_causali_magazzino" placeholder="Es. Carico per Acquisto, Reso...">
+                        <button class="btn btn-add" onclick="saveItem('causali_magazzino')">+</button>
+                    </div>
+                    <ul id="list_causali_magazzino" class="item-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-generali" class="tab-content">
+            <div class="config-grid">
+                <div class="config-box">
+                    <div class="box-title">🏦 Banche Appoggio Azienda</div>
+                    <div class="input-group">
+                        <input type="text" id="in_banche_azienda" placeholder="Es. Intesa Sanpaolo + IBAN...">
+                        <button class="btn btn-add" onclick="saveItem('banche_azienda')">+</button>
+                    </div>
+                    <ul id="list_banche_azienda" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">🚚 Porti e Modi Spedizione</div>
+                    <div class="input-group">
+                        <input type="text" id="in_modi_spedizione" placeholder="Es. Porto Franco - Corriere...">
+                        <button class="btn btn-add" onclick="saveItem('modi_spedizione')">+</button>
+                    </div>
+                    <ul id="list_modi_spedizione" class="item-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn btn-back">⬅️ Torna al Menu</a>
+    </div>
+
+    <script>
+        function openTab(evt, tabId) {
+            let i, tabcontent, tablinks;
+            
+            // Nasconde tutti i contenuti dei tab
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Rimuove la classe 'active' da tutti i pulsanti
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Mostra il tab corrente e aggiunge la classe active al pulsante premuto
+            document.getElementById(tabId).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        const KEYS = [
+            'classificazioni_clienti', 'categorie_fornitori', 'agenti_commercio',
+            'aliquote_iva', 'condizioni_pagamento', 'causali_vendita',
+            'unita_misura', 'depositi_magazzino', 'causali_magazzino',
+            'banche_azienda', 'modi_spedizione'
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            KEYS.forEach(key => renderList(key));
+        });
+
+        function getItems(key) {
+            let data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : [];
+        }
+
+        function renderList(key) {
+            const ul = document.getElementById("list_" + key);
+            if (!ul) return;
+            ul.innerHTML = "";
+            
+            let items = getItems(key);
+            
+            if (items.length === 0) {
+                ul.innerHTML = '<li class="empty-text">Nessun dato impostato.</li>';
+                return;
+            }
+            
+            items.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = "item-row";
+                li.innerHTML = `
+                    <span>${item}</span>
+                    <button class="btn-del" onclick="deleteItem('${key}', ${index})">×</button>
+                `;
+                ul.appendChild(li);
+            });
+        }
+
+        function saveItem(key) {
+            const input = document.getElementById("in_" + key);
+            if (!input) return;
+            const value = input.value.trim();
+            
+            if (value === "") {
+                alert("Impossibile inserire un campo vuoto.");
+                return;
+            }
+            
+            let items = getItems(key);
+            if (items.map(i => i.toLowerCase()).includes(value.toLowerCase())) {
+                alert("Questa voce è già presente in archivio.");
+                return;
+            }
+            
+            items.push(value);
+            localStorage.setItem(key, JSON.stringify(items));
+            input.value = "";
+            renderList(key);
+        }
+
+        function deleteItem(key, index) {
+            let items = getItems(key);
+            items.splice(index, 1);
+            localStorage.setItem(key, JSON.stringify(items));
+            renderList(key);
+        }
+    </script>
+</body>
+</html>
