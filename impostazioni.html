@@ -2,155 +2,84 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Anagrafica Clienti - Berry e Ciccio</title>
+    <title>Impostazioni Sistema - Berry e Ciccio</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 40px; color: #333; }
-        .form-container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .config-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         h2 { text-align: center; margin-bottom: 25px; color: #007bff; }
-        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
-        .form-group { flex: 1; display: flex; flex-direction: column; }
-        .form-group small { flex: 0 0 120px; }
-        label { font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #444; }
-        input[type="text"], input[type="email"], select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; font-family: inherit; }
-        input:focus, select:focus, textarea:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,0.2); }
-        .section-title { font-size: 16px; font-weight: bold; color: #007bff; margin-top: 25px; margin-bottom: 15px; border-bottom: 2px solid #f4f4f9; padding-bottom: 5px; }
-        .btn-container { display: flex; gap: 10px; margin-top: 30px; }
-        .btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
-        .btn-save { background-color: #28a745; color: white; }
-        .btn-save:hover { background-color: #218838; }
-        .btn-back { background-color: #6c757d; color: white; }
+        .form-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
+        input:focus { border-color: #007bff; outline: none; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center; }
+        .btn-add { background-color: #007bff; color: white; }
+        .btn-add:hover { background-color: #0056b3; }
+        .btn-back { background-color: #6c757d; color: white; display: block; width: 100px; margin-top: 25px; text-align: center; }
         .btn-back:hover { background-color: #5a6268; }
+        .list-title { font-weight: bold; margin-bottom: 10px; color: #444; font-size: 16px; border-bottom: 2px solid #f4f4f9; padding-bottom: 5px; }
+        .voice-list { list-style: none; padding: 0; margin: 0; }
+        .voice-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; margin-bottom: 8px; }
+        .btn-delete { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; }
+        .btn-delete:hover { background-color: #bd2130; }
+        .empty-msg { color: #888; font-style: italic; }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Anagrafica Clienti</h2>
-        <form>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="tipologia">Tipologia Cliente:</label>
-                    <select id="tipologia" name="tipologia">
-                        <option value="">-- Seleziona Tipologia --</option>
-                        <option value="privato">Privato</option>
-                        <option value="azienda">Azienda / P.IVA</option>
-                        <option value="rivenditore">Rivenditore</option>
-                        <option value="ingrosso">All'ingrosso</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="classificazione">Classificazione:</label>
-                    <select id="classificazione" name="classificazione">
-                        <option value="">-- Nessuna voce configurata --</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="section-title">Dati Personali / Societari</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nome">Nome / Ragione Sociale:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Es. Mario Rossi o Azienda Srl">
-                </div>
-                <div class="form-group">
-                    <label for="cognome">Cognome (se privato):</label>
-                    <input type="text" id="cognome" name="cognome">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="codice_fiscale">Codice Fiscale:</label>
-                    <input type="text" id="codice_fiscale" name="codice_fiscale">
-                </div>
-                <div class="form-group">
-                    <label for="partita_iva">Partita IVA:</label>
-                    <input type="text" id="partita_iva" name="partita_iva">
-                </div>
-            </div>
-
-            <div class="section-title">Indirizzo di Residenza / Sede</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="indirizzo">Via / Piazza e N. Civico:</label>
-                    <input type="text" id="indirizzo" name="indirizzo" placeholder="Es. Via Roma 15">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="citta">Città:</label>
-                    <input type="text" id="citta" name="citta">
-                </div>
-                <div class="form-group small">
-                    <label for="cap">CAP:</label>
-                    <input type="text" id="cap" name="cap" maxlength="5">
-                </div>
-                <div class="form-group small">
-                    <label for="provincia">Provincia:</label>
-                    <input type="text" id="provincia" name="provincia" maxlength="2" placeholder="Es. AN">
-                </div>
-            </div>
-
-            <div class="section-title">Contatti e Riferimenti</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="telefono">Telefono Fisso / Mobile:</label>
-                    <input type="text" id="telefono" name="telefono">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="riferimento">Persona di Riferimento interno:</label>
-                    <input type="text" id="riferimento" name="riferimento" placeholder="Es. Responsabile acquisti">
-                </div>
-                <div class="form-group">
-                    <label for="codice_sdi">Codice SDI / PEC:</label>
-                    <input type="text" id="codice_sdi" name="codice_sdi">
-                </div>
-            </div>
-
-            <div class="section-title">Note</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <textarea id="note" name="note" rows="3" placeholder="Note aggiuntive sul cliente..."></textarea>
-                </div>
-            </div>
-
-            <div class="btn-container">
-                <a href="index.html" class="btn btn-back">Torna al Menu</a>
-                <button type="button" class="btn btn-save" onclick="alert('Struttura pronta! Presto collegheremo il database per salvare i dati.')">Salva Cliente</button>
-            </div>
-        </form>
+    <div class="config-container">
+        <h2>⚙️ Impostazioni Classificazione Clienti</h2>
+        <p>Inserisci qui sotto i livelli o le categorie per i tuoi clienti (es. Clienti A, Clienti B, GOLD). Verranno mostrate automaticamente nella scheda Anagrafica.</p>
+        <div class="form-group">
+            <input type="text" id="nuova_voce" placeholder="Es. Cliente GOLD" autocomplete="off">
+            <button class="btn btn-add" onclick="aggiungiVoce()">Aggiungi</button>
+        </div>
+        <div class="list-title">Classificazioni Attuali:</div>
+        <ul id="lista_voci" class="voice-list"></ul>
+        <a href="index.html" class="btn btn-back">Indietro</a>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var select = document.getElementById("classificazione");
-            // Recupera le classificazioni salvate nelle impostazioni
-            var salvate = localStorage.getItem("classificazioni_clienti");
-            
-            if (salvate) {
-                var lista = JSON.parse(salvate);
-                if (lista.length > 0) {
-                    select.innerHTML = '<option value="">-- Seleziona Livello --</option>';
-                    lista.forEach(function(voce) {
-                        var opzione = document.createElement("option");
-                        opzione.value = voce.toLowerCase().replace(/\s+/g, '_');
-                        opzione.textContent = voce;
-                        select.appendChild(opzione);
-                    });
-                }
-            }
-        });
-    </script>
+        const STORAGE_KEY = "classificazioni_clienti";
+        document.addEventListener("DOMContentLoaded", mostraVoci);
 
+        function mostraVoci() {
+            const listaUl = document.getElementById("lista_voci");
+            listaUl.innerHTML = "";
+            let voci = ominiRecuperaVoci();
+            if (voci.length === 0) {
+                listaUl.innerHTML = '<li class="empty-msg">Nessuna classificazione configurata. Il menu in anagrafica sarà vuoto.</li>';
+                return;
+            }
+            voci.forEach((voce, index) => {
+                const li = document.createElement("li");
+                li.className = "voice-item";
+                li.innerHTML = `<span>${voce}</span><button class="btn-delete" onclick="eliminaVoce(${index})">Elimina</button>`;
+                listaUl.appendChild(li);
+            });
+        }
+
+        function aggiungiVoce() {
+            const input = document.getElementById("nuova_voce");
+            const testo = input.value.trim();
+            if (testo === "") { alert("Per favore, inserisci un nome valido."); return; }
+            let voci = ominiRecuperaVoci();
+            if (voci.map(v => v.toLowerCase()).includes(testo.toLowerCase())) { alert("Questa classificazione esiste già!"); return; }
+            voci.push(testo);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(voci));
+            input.value = "";
+            mostraVoci();
+        }
+
+        function eliminaVoce(index) {
+            let voci = ominiRecuperaVoci();
+            voci.splice(index, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(voci));
+            mostraVoci();
+        }
+
+        function ominiRecuperaVoci() {
+            let dati = localStorage.getItem(STORAGE_KEY);
+            return dati ? JSON.parse(dati) : [];
+        }
+    </script>
 </body>
 </html>
