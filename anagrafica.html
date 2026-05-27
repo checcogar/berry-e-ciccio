@@ -1,22 +1,70 @@
-<form>
-  <label for="nome">Nome:</label>
-  <input type="text" id="nome" name="nome">
-  
-  <label for="cognome">Cognome:</label>
-  <input type="text" id="cognome" name="cognome">
-  
-  <label for="indirizzo">Indirizzo:</label>
-  <input type="text" id="indirizzo" name="indirizzo">
-  
-  <label for="citta">Città:</label>
-  <input type="text" id="citta" name="citta">
-  
-  <label for="telefono">Telefono:</label>
-  <input type="text" id="telefono" name="telefono">
-  
-  <label for="email">Email:</label>
-  <input type="text" id="email" name="email">
-  
-  <label for="riferimento">Persona di riferimento:</label>
-  <input type="text" id="riferimento" name="riferimento">
-</form>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Anagrafica Clienti - Berry e Ciccio</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 40px; color: #333; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { text-align: center; margin-bottom: 25px; color: #007bff; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input[type="text"], input[type="email"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
+        input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,0.2); }
+        .btn-container { display: flex; gap: 10px; margin-top: 25px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+        .btn-save { background-color: #28a745; color: white; }
+        .btn-save:hover { background-color: #218838; }
+        .btn-back { background-color: #6c757d; color: white; }
+        .btn-back:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Anagrafica Clienti</h2>
+        <form>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome">
+            </div>
+            
+            <div class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" name="cognome">
+            </div>
+            
+            <div class="form-group">
+                <label for="indirizzo">Indirizzo:</label>
+                <input type="text" id="indirizzo" name="indirizzo">
+            </div>
+            
+            <div class="form-group">
+                <label for="citta">Città:</label>
+                <input type="text" id="citta" name="citta">
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Telefono:</label>
+                <input type="text" id="telefono" name="telefono">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="riferimento">Persona di Riferimento:</label>
+                <input type="text" id="riferimento" name="riferimento">
+            </div>
+
+            <div class="btn-container">
+                <a href="index.html" class="btn btn-back">Torna al Menu</a>
+                <button type="button" class="btn btn-save" onclick="alert('Struttura pronta! Presto collegheremo il salvataggio dei dati.')">Salva Cliente</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
