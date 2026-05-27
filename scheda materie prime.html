@@ -1,10 +1,64 @@
-<form>
-  <label for="ingrediente">Ingrediente:</label>
-  <input type="text" id="ingrediente" name="ingrediente">
-  
-  <label for="unita_misura">Unità di Misura:</label>
-  <input type="text" id="unita_misura" name="unita_misura">
-  
-  <label for="fornitore_abituale">Fornitore Abituale:</label>
-  <input type="text" id="fornitore_abituale" name="fornitore_abituale">
-</form>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Materie Prime - Berry e Ciccio</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 40px; color: #333; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { text-align: center; color: #007bff; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-container { display: flex; gap: 10px; margin-top: 25px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; color: white; }
+        .btn-save { background-color: #28a745; }
+        .btn-back { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>📦 Carico Materia Prima</h2>
+        <form>
+            <div class="form-group">
+                <label>Nome Materia Prima:</label>
+                <input type="text" placeholder="Es. Farina Tipo 0, Acciaio, ecc.">
+            </div>
+            <div class="form-group">
+                <label>Codice Interno:</label>
+                <input type="text" placeholder="Es. MP-001">
+            </div>
+            <div class="form-group">
+                <label>Unità di Misura:</label>
+                <select id="um_select">
+                    <option value="">-- Configura nelle impostazioni --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Scorta Minima (Allerta):</label>
+                <input type="text">
+            </div>
+            <div class="btn-container">
+                <a href="index.html" class="btn btn-back">Indietro</a>
+                <button type="button" class="btn btn-save" onclick="alert('Materia prima registrata!')">Salva</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var select = document.getElementById("um_select");
+            var salvate = localStorage.getItem("unita_misura");
+            if (salvate) {
+                var lista = JSON.parse(salvate);
+                if (lista.length > 0) {
+                    select.innerHTML = '<option value="">-- Seleziona UM --</option>';
+                    lista.forEach(function(v) {
+                        var opt = document.createElement("option");
+                        opt.textContent = v; select.appendChild(opt);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
