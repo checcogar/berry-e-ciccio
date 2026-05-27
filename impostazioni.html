@@ -2,84 +2,72 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Impostazioni Sistema - Berry e Ciccio</title>
+    <title>Impostazioni di Sistema - Berry e Ciccio</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 40px; color: #333; }
-        .config-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { text-align: center; margin-bottom: 25px; color: #007bff; }
-        .form-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 30px; color: #333; margin: 0; }
+        .main-container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { text-align: center; margin-bottom: 30px; color: #007bff; }
+        
+        /* Struttura a Tab (Schede) stile Gestionale Professionale */
+        .tab-container { display: flex; border-bottom: 2px solid #ddd; margin-bottom: 20px; }
+        .tab-btn { padding: 12px 20px; border: none; background: none; font-size: 15px; font-weight: bold; cursor: pointer; color: #555; border-bottom: 3px solid transparent; }
+        .tab-btn:hover { color: #007bff; background-color: #f8f9fa; }
+        .tab-btn.active { color: #007bff; border-bottom-color: #007bff; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Griglia interna per le opzioni */
+        .config-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .config-box { background: #fdfdfd; border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .box-title { font-weight: bold; font-size: 15px; color: #333; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        
+        /* Form inserimento rapido */
+        .input-group { display: flex; gap: 5px; margin-bottom: 15px; }
+        input[type="text"] { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
         input:focus { border-color: #007bff; outline: none; }
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center; }
+        
+        .btn { padding: 8px 12px; border: none; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center; }
         .btn-add { background-color: #007bff; color: white; }
         .btn-add:hover { background-color: #0056b3; }
-        .btn-back { background-color: #6c757d; color: white; display: block; width: 100px; margin-top: 25px; text-align: center; }
+        .btn-back { background-color: #6c757d; color: white; display: inline-block; width: 120px; margin-top: 30px; padding: 12px; font-size: 16px; }
         .btn-back:hover { background-color: #5a6268; }
-        .list-title { font-weight: bold; margin-bottom: 10px; color: #444; font-size: 16px; border-bottom: 2px solid #f4f4f9; padding-bottom: 5px; }
-        .voice-list { list-style: none; padding: 0; margin: 0; }
-        .voice-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; margin-bottom: 8px; }
-        .btn-delete { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; }
-        .btn-delete:hover { background-color: #bd2130; }
-        .empty-msg { color: #888; font-style: italic; }
+        
+        /* Liste delle voci inserite */
+        .item-list { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto; border: 1px solid #f0f0f0; border-radius: 4px; background: white; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
+        .item-row:last-child { border-bottom: none; }
+        .btn-del { background: none; border: none; color: #dc3545; cursor: pointer; font-weight: bold; font-size: 14px; }
+        .btn-del:hover { color: #bd2130; }
+        .empty-text { color: #999; font-style: italic; text-align: center; padding: 10px; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <div class="config-container">
-        <h2>⚙️ Impostazioni Classificazione Clienti</h2>
-        <p>Inserisci qui sotto i livelli o le categorie per i tuoi clienti (es. Clienti A, Clienti B, GOLD). Verranno mostrate automaticamente nella scheda Anagrafica.</p>
-        <div class="form-group">
-            <input type="text" id="nuova_voce" placeholder="Es. Cliente GOLD" autocomplete="off">
-            <button class="btn btn-add" onclick="aggiungiVoce()">Aggiungi</button>
+    <div class="main-container">
+        <h2>⚙️ Pannello Configurazione di Sistema</h2>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab(event, 'tab-anagrafiche')">👥 Tabelle Anagrafiche</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-vendite')">📄 Vendite & Fisco</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-magazzino')">📦 Magazzino & Logistica</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-generali')">🏢 Dati Azienda & Banche</button>
         </div>
-        <div class="list-title">Classificazioni Attuali:</div>
-        <ul id="lista_voci" class="voice-list"></ul>
-        <a href="index.html" class="btn btn-back">Indietro</a>
-    </div>
 
-    <script>
-        const STORAGE_KEY = "classificazioni_clienti";
-        document.addEventListener("DOMContentLoaded", mostraVoci);
-
-        function mostraVoci() {
-            const listaUl = document.getElementById("lista_voci");
-            listaUl.innerHTML = "";
-            let voci = ominiRecuperaVoci();
-            if (voci.length === 0) {
-                listaUl.innerHTML = '<li class="empty-msg">Nessuna classificazione configurata. Il menu in anagrafica sarà vuoto.</li>';
-                return;
-            }
-            voci.forEach((voce, index) => {
-                const li = document.createElement("li");
-                li.className = "voice-item";
-                li.innerHTML = `<span>${voce}</span><button class="btn-delete" onclick="eliminaVoce(${index})">Elimina</button>`;
-                listaUl.appendChild(li);
-            });
-        }
-
-        function aggiungiVoce() {
-            const input = document.getElementById("nuova_voce");
-            const testo = input.value.trim();
-            if (testo === "") { alert("Per favore, inserisci un nome valido."); return; }
-            let voci = ominiRecuperaVoci();
-            if (voci.map(v => v.toLowerCase()).includes(testo.toLowerCase())) { alert("Questa classificazione esiste già!"); return; }
-            voci.push(testo);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(voci));
-            input.value = "";
-            mostraVoci();
-        }
-
-        function eliminaVoce(index) {
-            let voci = ominiRecuperaVoci();
-            voci.splice(index, 1);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(voci));
-            mostraVoci();
-        }
-
-        function ominiRecuperaVoci() {
-            let dati = localStorage.getItem(STORAGE_KEY);
-            return dati ? JSON.parse(dati) : [];
-        }
-    </script>
-</body>
-</html>
+        <div id="tab-anagrafiche" class="tab-content active">
+            <div class="config-grid">
+                <div class="config-box">
+                    <div class="box-title">🎖️ Classificazione Clienti (A, B, GOLD...)</div>
+                    <div class="input-group">
+                        <input type="text" id="in_classificazioni_clienti" placeholder="Nuovo livello...">
+                        <button class="btn btn-add" onclick="saveItem('classificazioni_clienti')">+</button>
+                    </div>
+                    <ul id="list_classificazioni_clienti" class="item-list"></ul>
+                </div>
+                <div class="config-box">
+                    <div class="box-title">🚚 Categorie Fornitori</div>
+                    <div class="input-group">
+                        <input type="text" id="in_categorie_fornitori" placeholder="Es. Subfornitore, Esterno...">
+                        <button class="btn btn-add" onclick="saveItem('categorie_fornitori')">+</button>
+                    </div>
+                    <ul id="list_categorie_fornitori" class
